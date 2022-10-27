@@ -8,7 +8,7 @@ from decouple import config
 JWT_KEY = config('JWT_KEY')
 
 
-class AuthJWTCsrf():
+class AuthJwtCsrf():
     pwd_ctx = CryptContext(schemes=["bcrypt"], deprecated="auto")
     secret_key = JWT_KEY
 
@@ -50,10 +50,10 @@ class AuthJWTCsrf():
         subject = self.decode_jwt(value)
         return subject
 
-    # def verify_update_jwt(self, request) -> tuple[str, str]:
-    #     subject = self.verify_jwt(request)
-    #     new_token = self.encode_jwt(subject)
-    #     return new_token, subject
+    def verify_update_jwt(self, request) -> tuple[str, str]:
+        subject = self.verify_jwt(request)
+        new_token = self.encode_jwt(subject)
+        return new_token, subject
 
     def verify_csrf_update_jwt(self, request, csrf_protect, headers) -> str:
         csrf_token = csrf_protect.get_csrf_from_headers(headers)
