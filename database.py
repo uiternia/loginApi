@@ -3,10 +3,12 @@ from typing import overload
 from decouple import config
 import motor.motor_asyncio
 from auth_utils import AuthJWTCsrf
+import asyncio
 
 MONGO_API_KEY = config('MONGO_API_KEY')
 
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_API_KEY)
+client.get_io_loop = asyncio.get_event_loop
 database = client.FastAPIUkke
 collection_user = database.user
 auth = AuthJWTCsrf()
