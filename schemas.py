@@ -30,5 +30,10 @@ class UserInfo(BaseModel):
     email: str
 
 
+class UserEmail(BaseModel):
+    id: Optional[str] = None
+    email: str
+
+
 class Csrf(BaseModel):
     csrf_token: str
