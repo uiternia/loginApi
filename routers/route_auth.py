@@ -56,4 +56,4 @@ def get_user_refresh_jwt(request: Request, response: Response):
     response.set_cookie(
         key="access_token", value=f"Bearer {new_token}", httponly=True, samesite="none", secure=True)
     res = get_user_info(subject)
-    return {'email': subject}
+    return res
