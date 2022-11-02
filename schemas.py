@@ -37,3 +37,9 @@ class UserEmail(BaseModel):
 
 class Csrf(BaseModel):
     csrf_token: str
+
+
+class MyUser(BaseModel):
+    name: str
+    email: str
+    image: str
