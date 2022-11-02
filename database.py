@@ -53,6 +53,6 @@ async def db_login(data: dict) -> str:
     return token
 
 
-async def get_user_info(email) -> dict:
-    user = await collection_user.find_one({"email": email})
+async def get_user_info(subject: str) -> dict:
+    user = await collection_user.find_one({"email": subject})
     return user_serializer(user)

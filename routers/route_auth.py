@@ -51,9 +51,9 @@ def logout(request: Request, response: Response, csrf_protect: CsrfProtect = Dep
 
 
 @router.get('/api/user', response_model=MyUser)
-def get_user_refresh_jwt(request: Request, response: Response):
+async def get_user_refresh_jwt(request: Request, response: Response):
     new_token, subject = auth.verify_update_jwt(request)
     response.set_cookie(
         key="access_token", value=f"Bearer {new_token}", httponly=True, samesite="none", secure=True)
-    res = get_user_info(subject)
-    return res
+    user = await db_login(subject)
+    return user
