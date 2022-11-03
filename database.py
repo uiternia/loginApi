@@ -1,6 +1,7 @@
 from fastapi import HTTPException
 from typing import overload
 from decouple import config
+from typing import Union
 import motor.motor_asyncio
 from auth_utils import AuthJwtCsrf
 import asyncio
@@ -53,6 +54,6 @@ async def db_login(data: dict) -> str:
     return token
 
 
-async def get_user_info(subject: str) -> dict:
+async def get_user_info(subject: str) -> Union[dict, bool]:
     user = await collection_user.find_one({"email": subject})
     return user_serializer(user)
